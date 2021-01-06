@@ -67,7 +67,6 @@ public class SpringBootTryApplication {
                     lastName,
                     email,
                     faker.number().numberBetween(17, 55));
-            studentRepository.save(student);
 
             student.addBook(new Book(
                     "clean code", LocalDateTime.now().minusDays(4)
@@ -79,17 +78,22 @@ public class SpringBootTryApplication {
                     "think and grow rich", LocalDateTime.now().minusYears(1)
             ));
 
-            StudentIdCard studentIdCard = new StudentIdCard("123456789", student);
+            StudentIdCard studentIdCard =
+                    new StudentIdCard(
+                            String.valueOf(faker.number().numberBetween(100000,1000000)), student);
             studentIdCardRepository.save(studentIdCard);
             student.setStudentIdCard(studentIdCard);
 
             studentRepository.save(student);
 
+            Student newStudent = studentRepository.findById(53L).orElseThrow();
+            StudentIdCard newStudentIdCard = new StudentIdCard("512521", newStudent);
+            student.setStudentIdCard(newStudentIdCard);
+            studentRepository.save(newStudent);
 
             studentRepository.findAll().forEach(
                     studentLambdaParam -> System.out.println(
                             studentLambdaParam.getFirstName() + " " + studentLambdaParam.getAge()));
-
         };
     }
 

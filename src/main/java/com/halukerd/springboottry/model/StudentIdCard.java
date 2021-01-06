@@ -68,6 +68,18 @@ public class StudentIdCard {
         return cardNumber;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
     @Override
     public String toString() {
         return "StudentIdCard{" +
