@@ -1,14 +1,7 @@
 package com.halukerd.springboottry.model;
 
-import lombok.*;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-
-@Getter
-@Setter
-@NoArgsConstructor
-@RequiredArgsConstructor
 
 @Entity(name = "Book")
 @Table(name = "book")
@@ -30,14 +23,12 @@ public class Book {
     )
     private Long id;
 
-    @NonNull
     @Column(
             name = "book_name",
             nullable = false
     )
     private String bookName;
 
-    @NonNull
     @Column(
             name = "created_at",
             nullable = false,
@@ -54,6 +45,47 @@ public class Book {
             )
     )
     private Student student;
+
+    public Book() {
+    }
+
+    public Book(String bookName,
+                LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        this.bookName = bookName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public String getBookName() {
+        return bookName;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
 
     @Override
     public String toString() {

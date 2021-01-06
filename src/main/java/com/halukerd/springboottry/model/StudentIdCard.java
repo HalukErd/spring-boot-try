@@ -1,7 +1,5 @@
 package com.halukerd.springboottry.model;
 
-import lombok.*;
-
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.SEQUENCE;
@@ -33,7 +31,6 @@ public class StudentIdCard {
     )
     private Long id;
 
-    @NonNull
     @Column(
             name = "card_number",
             nullable = false,

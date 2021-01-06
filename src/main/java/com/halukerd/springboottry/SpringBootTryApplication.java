@@ -88,7 +88,7 @@ public class SpringBootTryApplication {
 
             studentRepository.findAll().forEach(
                     studentLambdaParam -> System.out.println(
-                            studentLambdaParam.getFirst_name() + " " + studentLambdaParam.getAge()));
+                            studentLambdaParam.getFirstName() + " " + studentLambdaParam.getAge()));
 
         };
     }
