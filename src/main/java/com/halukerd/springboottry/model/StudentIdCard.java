@@ -38,7 +38,6 @@ public class StudentIdCard {
     )
     private String cardNumber;
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name = "student_id",
@@ -49,9 +48,24 @@ public class StudentIdCard {
     )
     private Student student;
 
+    public StudentIdCard(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
     public StudentIdCard(String cardNumber, Student student) {
         this.cardNumber = cardNumber;
         this.student = student;
+    }
+
+    public StudentIdCard() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
     }
 
     @Override

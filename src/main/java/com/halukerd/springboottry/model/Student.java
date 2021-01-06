@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @Entity(name = "Student")
 @Table(
         name = "student",
@@ -15,19 +17,17 @@ import java.util.List;
 )
 public class Student {
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "sequence_name"
-    )
     @SequenceGenerator(
-            name = "sequence_generator_name",
-            sequenceName = "sequence_name",
-            initialValue = 1,
+            name = "student_sequence",
+            sequenceName = "student_sequence",
             allocationSize = 1
     )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "student_sequence"
+    )
     @Column(
-            name = "id",
-            updatable = false
+            name = "id"
     )
     private Long id;
 
@@ -64,7 +64,6 @@ public class Student {
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
     )
     private StudentIdCard studentIdCard;
-
 
     @OneToMany(
             mappedBy = "student",

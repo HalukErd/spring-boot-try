@@ -39,6 +39,7 @@ public class Book {
     @ManyToOne
     @JoinColumn(
             name = "student_id",
+            nullable = false,
             referencedColumnName = "id",
             foreignKey = @ForeignKey(
                     name = "student_book_fk"
