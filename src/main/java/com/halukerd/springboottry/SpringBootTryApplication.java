@@ -89,7 +89,7 @@ public class SpringBootTryApplication {
 
             Student newStudent = studentRepository.findById(51L).orElseThrow();
             StudentIdCard newStudentIdCard = new StudentIdCard("511221", newStudent);
-//            studentIdCardRepository.save(newStudentIdCard);
+            studentIdCardRepository.save(newStudentIdCard);
             student.setStudentIdCard(newStudentIdCard);
             studentRepository.save(newStudent);
 
