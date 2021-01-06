@@ -1,8 +1,15 @@
 package com.halukerd.springboottry.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 
 import static javax.persistence.GenerationType.SEQUENCE;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@RequiredArgsConstructor
 
 @Entity(name = "StudentIdCard")
 @Table(
@@ -36,6 +43,7 @@ public class StudentIdCard {
             nullable = false,
             length = 15
     )
+    @NonNull
     private String cardNumber;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -46,39 +54,8 @@ public class StudentIdCard {
                     name = "student_id_fk"
             )
     )
+    @NonNull
     private Student student;
-
-    public StudentIdCard(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    public StudentIdCard(String cardNumber, Student student) {
-        this.cardNumber = cardNumber;
-        this.student = student;
-    }
-
-    public StudentIdCard() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getCardNumber() {
-        return cardNumber;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
 
     @Override
     public String toString() {

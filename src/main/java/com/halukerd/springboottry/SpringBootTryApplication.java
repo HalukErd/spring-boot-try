@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.logging.Logger;
 
 @SpringBootApplication
 public class SpringBootTryApplication {
@@ -86,14 +87,17 @@ public class SpringBootTryApplication {
 
             studentRepository.save(student);
 
-            Student newStudent = studentRepository.findById(53L).orElseThrow();
-            StudentIdCard newStudentIdCard = new StudentIdCard("512521", newStudent);
+            Student newStudent = studentRepository.findById(51L).orElseThrow();
+            StudentIdCard newStudentIdCard = new StudentIdCard("511221", newStudent);
+//            studentIdCardRepository.save(newStudentIdCard);
             student.setStudentIdCard(newStudentIdCard);
             studentRepository.save(newStudent);
 
-            studentRepository.findAll().forEach(
-                    studentLambdaParam -> System.out.println(
-                            studentLambdaParam.getFirstName() + " " + studentLambdaParam.getAge()));
+
+
+//            studentRepository.findAll().forEach(
+//                    studentLambdaParam -> System.out.println(
+//                            studentLambdaParam.getFirstName() + " " + studentLambdaParam.getAge()));
         };
     }
 

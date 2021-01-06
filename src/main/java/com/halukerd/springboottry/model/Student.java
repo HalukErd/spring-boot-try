@@ -1,10 +1,19 @@
 package com.halukerd.springboottry.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
+
+@Getter
+@Setter
+@NoArgsConstructor
 
 @Entity(name = "Student")
 @Table(
@@ -36,6 +45,7 @@ public class Student {
             nullable = false,
             columnDefinition = "TEXT"
     )
+    @NonNull
     private String firstName;
 
     @Column(
@@ -43,6 +53,7 @@ public class Student {
             nullable = false,
             columnDefinition = "TEXT"
     )
+    @NonNull
     private String lastName;
 
     @Column(
@@ -50,12 +61,14 @@ public class Student {
             nullable = false,
             columnDefinition = "TEXT"
     )
+    @NonNull
     private String email;
 
     @Column(
             name = "age",
             nullable = false
     )
+    @NonNull
     private Integer age;
 
     @OneToOne(
@@ -71,7 +84,7 @@ public class Student {
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             fetch = FetchType.LAZY
     )
-    private List<Book> books = new ArrayList<Book>();
+    private List<Book> books = new ArrayList<>();
 
     public Student(String firstName,
                    String lastName,
@@ -81,10 +94,6 @@ public class Student {
         this.lastName = lastName;
         this.email = email;
         this.age = age;
-    }
-
-    public Student() {
-
     }
 
     public void addBook(Book book) {
@@ -101,55 +110,6 @@ public class Student {
             book.setStudent(null);
         }
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public void setStudentIdCard(StudentIdCard studentIdCard) {
-        this.studentIdCard = studentIdCard;
-    }
-
-    public List<Book> getBooks() {
-        return books;
-    }
-
 
     @Override
     public String toString() {

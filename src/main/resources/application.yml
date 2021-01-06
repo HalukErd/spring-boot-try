@@ -4,7 +4,7 @@ spring:
     username: postgres
     password: dockerpassword
   jpa:
-    show-sql: true
+    show-sql: false
 
     properties:
       hibernate:
