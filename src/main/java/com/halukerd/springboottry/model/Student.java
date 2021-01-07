@@ -1,9 +1,6 @@
 package com.halukerd.springboottry.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +11,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Getter
 @Setter
 @NoArgsConstructor
+@RequiredArgsConstructor
 
 @Entity(name = "Student")
 @Table(
@@ -74,7 +72,8 @@ public class Student {
     @OneToOne(
             mappedBy = "student",
             orphanRemoval = true,
-            cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch = FetchType.LAZY
     )
     private StudentIdCard studentIdCard;
 
@@ -85,16 +84,6 @@ public class Student {
             fetch = FetchType.LAZY
     )
     private List<Book> books = new ArrayList<>();
-
-    public Student(String firstName,
-                   String lastName,
-                   String email,
-                   Integer age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.age = age;
-    }
 
     public void addBook(Book book) {
         if (!books.contains(book)) {
