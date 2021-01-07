@@ -1,10 +1,7 @@
 package com.halukerd.springboottry;
 
 import com.github.javafaker.Faker;
-import com.halukerd.springboottry.model.Book;
-import com.halukerd.springboottry.model.Course;
-import com.halukerd.springboottry.model.Student;
-import com.halukerd.springboottry.model.StudentIdCard;
+import com.halukerd.springboottry.model.*;
 import com.halukerd.springboottry.repository.StudentIdCardRepository;
 import com.halukerd.springboottry.repository.StudentRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -88,12 +85,21 @@ public class SpringBootTryApplication {
             StudentIdCard studentIdCard = generateRandomIdCard(student);
             student.setStudentIdCard(studentIdCard);
 
-            student.enrolToCourse(
-                    new Course("Computer Science", "IT")
+            student.addEnrolment(
+                    new Enrolment(
+                            new EnrolmentId(1L, 1L),
+                            student,
+                            new Course("Computer Science", "IT"),
+                            LocalDateTime.now().minusDays(1)
+                    )
             );
-
-            student.enrolToCourse(
-                    new Course("Spring Data Jpa", "IT")
+            student.addEnrolment(
+                    new Enrolment(
+                            new EnrolmentId(1L, 2L),
+                            student,
+                            new Course("Spring Data Jpa", "IT"),
+                            LocalDateTime.now().minusDays(1)
+                    )
             );
 
             studentRepository.save(student);

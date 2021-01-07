@@ -47,8 +47,10 @@ public class Course {
     @NonNull
     private String department;
 
-    @ManyToMany(mappedBy = "courses")
-    private List<Student> students = new ArrayList<>();
+    @OneToMany(
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            mappedBy = "course")
+    private List<Enrolment> enrolments = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -56,7 +58,7 @@ public class Course {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", department='" + department + '\'' +
-                ", students=" + students +
+                ", enrolments=" + enrolments +
                 '}';
     }
 }

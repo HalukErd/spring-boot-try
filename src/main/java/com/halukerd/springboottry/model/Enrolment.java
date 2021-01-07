@@ -1,29 +1,50 @@
 package com.halukerd.springboottry.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-//@Entity(name = "Enrolment")
-//@Table(name = "enrolment")
+@Getter
+@Setter
+@NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
+
+@Entity(name = "Enrolment")
+@Table(name = "enrolment")
 public class Enrolment {
 
-//    @Id
-//    @GeneratedValue(
-//            strategy = GenerationType.SEQUENCE,
-//            generator = "enrolment_sequence_generator"
-//    )
-//    @SequenceGenerator(
-//            name = "enrolment_sequence_generator",
-//            sequenceName = "enrolment_sequence_generator",
-//            allocationSize = 1
-//    )
-//    @Column(
-//            name = "id"
-//    )
-//    private Long id;
-//
-//    @ManyToMany
-//    private Student student;
-//    private Course course;
-//    private LocalDateTime createdAt;
+    @EmbeddedId
+    EnrolmentId id;
+
+    @ManyToOne
+    @MapsId("studentId")
+    @JoinColumn(
+            name = "student_id",
+            foreignKey = @ForeignKey(
+                    name = "enrolment_student_id_fk"
+            )
+    )
+    @NonNull
+    private Student student;
+
+    @ManyToOne
+    @MapsId("courseId")
+    @JoinColumn(
+            name = "course_id",
+            foreignKey = @ForeignKey(
+                    name = "enrolment_course_id_fk"
+            )
+    )
+    @NonNull
+    private Course course;
+
+    @Column(
+            name = "created_at",
+            nullable = false,
+            columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
+    )
+    @NonNull
+    private LocalDateTime createdAt;
 }
