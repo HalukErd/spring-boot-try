@@ -2,6 +2,7 @@ package com.halukerd.springboottry;
 
 import com.github.javafaker.Faker;
 import com.halukerd.springboottry.model.Book;
+import com.halukerd.springboottry.model.Course;
 import com.halukerd.springboottry.model.Student;
 import com.halukerd.springboottry.model.StudentIdCard;
 import com.halukerd.springboottry.repository.StudentIdCardRepository;
@@ -79,6 +80,23 @@ public class SpringBootTryApplication {
 //            studentRepository.findAll().forEach(
 //                    studentLambdaParam -> System.out.println(
 //                            studentLambdaParam.getFirstName() + " " + studentLambdaParam.getAge()));
+
+//            --------------tryin student and course without enrolment-------------
+            Student student = generateRandomStudent();
+            addNewBooksToStudent(student);
+
+            StudentIdCard studentIdCard = generateRandomIdCard(student);
+            student.setStudentIdCard(studentIdCard);
+
+            student.enrolToCourse(
+                    new Course("Computer Science", "IT")
+            );
+
+            student.enrolToCourse(
+                    new Course("Spring Data Jpa", "IT")
+            );
+
+            studentRepository.save(student);
         };
     }
 
@@ -100,5 +118,23 @@ public class SpringBootTryApplication {
                 lastName,
                 email,
                 faker.number().numberBetween(17, 55));
+    }
+
+    private void addNewBooksToStudent(Student student) {
+        student.addBook(new Book(
+                "clean code", LocalDateTime.now().minusDays(4)
+        ));
+        student.addBook(new Book(
+                "spring data jpa", LocalDateTime.now()
+        ));
+        student.addBook(new Book(
+                "think and grow rich", LocalDateTime.now().minusYears(1)
+        ));
+    }
+
+    private StudentIdCard generateRandomIdCard(Student student) {
+        Faker faker = new Faker();
+        String cardNumber = String.valueOf(faker.number().numberBetween(10000, 100000));
+        return new StudentIdCard(cardNumber, student);
     }
 }
