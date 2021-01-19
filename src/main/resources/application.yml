@@ -1,8 +1,5 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/spring_boot_try
-    username: postgres
-    password: dockerpassword
+
   jpa:
     show-sql: true
 
@@ -11,4 +8,14 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
+
+  profiles:
+    active: pc
+
+logging:
+  file:
+    path: C:/logs/
+
+server:
+  port: 8080

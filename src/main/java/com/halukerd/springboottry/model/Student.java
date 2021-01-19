@@ -1,5 +1,6 @@
 package com.halukerd.springboottry.model;
 
+import com.halukerd.springboottry.aspect.Loggable;
 import lombok.*;
 
 import javax.persistence.*;
@@ -7,11 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
-
-@Getter
-@Setter
-@NoArgsConstructor
-@RequiredArgsConstructor
 
 @Entity(name = "Student")
 @Table(
@@ -107,6 +103,7 @@ public class Student {
         }
     }
 
+    @Loggable
     public void addEnrolment(Enrolment enrolment) {
         if (!enrolments.contains(enrolment)) {
             enrolments.add(enrolment);
@@ -126,5 +123,82 @@ public class Student {
                 ", email='" + email + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+    @Loggable
+    public Student() {
+    }
+
+    @Loggable
+    public Student(@NonNull String firstName, @NonNull String lastName, @NonNull String email, @NonNull Integer age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.age = age;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public StudentIdCard getStudentIdCard() {
+        return studentIdCard;
+    }
+
+    @Loggable
+    public void setStudentIdCard(StudentIdCard studentIdCard) {
+        this.studentIdCard = studentIdCard;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    public List<Enrolment> getEnrolments() {
+        return enrolments;
+    }
+
+    public void setEnrolments(List<Enrolment> enrolments) {
+        this.enrolments = enrolments;
     }
 }
