@@ -46,7 +46,7 @@ public class StudentIdCard {
     @NonNull
     private String cardNumber;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name = "student_id",
             referencedColumnName = "id",

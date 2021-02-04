@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 @Transactional(readOnly = true)
 public interface StudentRepository extends PagingAndSortingRepository<Student, Long> {
 
